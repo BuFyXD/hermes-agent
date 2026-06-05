@@ -52,8 +52,8 @@ _HERMES_CORE_TOOLS = [
     "session_search",
     # Clarifying questions
     "clarify",
-    # Code execution + delegation
-    "execute_code", "delegate_task",
+    # Code execution + delegation + Claude Code sub-agent
+    "execute_code", "delegate_task", "claude_code",
     # Cronjob management
     "cronjob",
     # Cross-platform messaging (gated on gateway running via check_fn)
@@ -243,6 +243,16 @@ TOOLSETS = {
     "delegation": {
         "description": "Spawn subagents with isolated context for complex subtasks",
         "tools": ["delegate_task"],
+        "includes": []
+    },
+
+    "claude-code": {
+        "description": (
+            "Claude Code sub-agent (DeepSeek backend) for complex coding, "
+            "refactoring, and analysis tasks. Synchronous fire-and-wait — "
+            "the parent agent blocks until Claude Code completes."
+        ),
+        "tools": ["claude_code"],
         "includes": []
     },
 
